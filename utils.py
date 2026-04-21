@@ -122,21 +122,16 @@ def create_injuries_tab():
             "Based on the scatter plot grid comparing 'Persons Killed' versus 'Persons Injured' across the boroughs, there is no direct correlation between the volume of injuries and the number of fatalities in a single incident; in fact, extreme events tend to be exclusively one or the other. The vast majority of crashes cluster tightly near zero for both metrics. However, looking at the outliers reveals that the events causing the highest number of injuries (such as those approaching 30 to 40 in the Bronx, Queens, and the 'Unknown' category) remarkably resulted in zero deaths. Conversely, the single most lethal incident—a stark outlier in Manhattan recording 8 fatalities—involved zero non-fatal injuries. This visual pattern suggests two distinct types of severe accidents: concentrated, catastrophic impacts that are immediately lethal to a small group (such as pedestrians or a single vehicle's occupants), and broader, multi-vehicle or mass-transit collisions that cause widespread but ultimately survivable injuries.")
 
 def create_predictions_tab():
-    t1, t2, t3 = st.tabs(["LINEAR", "LOGISTIC", "DECISION TREE"])
+    t1, t2, t3 = st.tabs(["LOGISTIC COEFFICIENTS", "PREDICTED PROBABILITY", "DECISION TREE"])
     
     with t1:
-        # Need to work on this
-        render_image_with_insight("plots/TopCoefficients.png", "Linear Model Coefficients", 
-            "This plot shows the most important features influencing predictions in the linear model.")
-    
-    with t2:
-        sub1, sub2 = st.tabs(["TOP COEFFICIENTS", "PREDICTED PROBABILITY"])
-        with sub1:
-            render_image_with_insight("plots/TopCoefficients.png", "Logistic Coefficients", 
+        render_image_with_insight("plots/TopCoefficients.png", "Logistic Coefficients", 
                 "Based on the horizontal bar chart displaying model coefficients, 'Failure to Yield Right-of-Way' stands out as the strongest predictor for increasing the probability of an injury, possessing a coefficient value nearly double that of several other major infractions. While earlier frequency charts indicated that 'Driver Inattention/Distraction' caused the highest raw volume of accidents, this predictive model suggests that 'Failure to Yield' is significantly more likely to actually result in physical harm when a crash does occur. Common moving violations like 'Driver Inattention/Distraction' and 'Following Too Closely' still prominently raise the likelihood of injury, but to a lesser degree. Notably, spatial and temporal features—such as the incident occurring in Brooklyn or on a Sunday—have a positive, yet extremely marginal, influence on injury probability when compared to the severe impact of direct, behavioral driving errors.")
-        with sub2:
-            render_image_with_insight("plots/PredictedProbability.png", "Predicted Probability Distribution", 
+        
+    with t2:
+        render_image_with_insight("plots/PredictedProbability.png", "Predicted Probability Distribution", 
                 "The 'Predicted Probability of Injury' histogram provides a high-level view of your model's confidence across the entire dataset. The distribution is unimodal and slightly right-skewed, with the vast majority of predicted probabilities concentrated between 0.20 and 0.35. This indicates that for most traffic incidents in this dataset, the model estimates a 20% to 35% chance of an injury occurring. While there is a secondary 'hump' or shoulder around the 0.45 mark, very few incidents are assigned a high-certainty probability (above 0.60). This suggests that while certain factors (like 'Failure to Yield') significantly increase risk, the presence of an injury in a collision is still subject to a high degree of randomness or depends on variables not fully captured by the current feature set.")
+    
     with t3:
         render_image_with_insight("plots/DecisionTree_minimal.png", "Decision Tree Visual", 
             "Decision Tree visualization utilizing borough-level data to map out injury outcomes.")
