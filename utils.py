@@ -107,7 +107,7 @@ def create_contributing_factors_tab(df):
             st.dataframe(factor_summary, use_container_width=True)
 
 def create_injuries_tab():
-    t1, t2, t3 = st.tabs(["INJURY DISTRIBUTION BY BOROUGH", "TOTAL INJURIES BY HOUR", "INJURED VS KILLED"])
+    t1, t2, t3 = st.tabs(["INJURY DISTRIBUTION BY BOROUGH", "TOTAL INJURIES BY HOUR", "DAILY CRASH VOLUME VS. INJURY CORRELATION"])
     
     with t1:
         render_image_with_insight("plots/InjuryDistributionbyBorough.png", "Injury Distribution by Borough", 
@@ -118,9 +118,12 @@ def create_injuries_tab():
             "The line chart of 'Total Injuries by Hour' demonstrates a clear bimodal distribution that closely tracks typical daily commuting patterns. Injuries reach their absolute lowest point during the early morning hours (3:00 AM to 5:00 AM) before experiencing a sharp rise that peaks around 8:00 AM, coinciding with the morning rush hour. Following a minor mid-morning dip, there is a sustained and significant climb throughout the afternoon, culminating in a daily maximum at 5:00 PM (17:00). This evening peak is notably higher and broader than the morning surge, suggesting that the combination of increased traffic volume, driver fatigue, and diminishing daylight during the evening commute creates the highest-risk window for injuries. After 6:00 PM, injury counts steadily decline as traffic volume tapers off into the night.")
     
     with t3:
-        render_image_with_insight("plots/Injury_vs_Killed_By_Borough.png", "Injured vs Killed", 
-            "Based on the scatter plot grid comparing 'Persons Killed' versus 'Persons Injured' across the boroughs, there is no direct correlation between the volume of injuries and the number of fatalities in a single incident; in fact, extreme events tend to be exclusively one or the other. The vast majority of crashes cluster tightly near zero for both metrics. However, looking at the outliers reveals that the events causing the highest number of injuries (such as those approaching 30 to 40 in the Bronx, Queens, and the 'Unknown' category) remarkably resulted in zero deaths. Conversely, the single most lethal incident—a stark outlier in Manhattan recording 8 fatalities—involved zero non-fatal injuries. This visual pattern suggests two distinct types of severe accidents: concentrated, catastrophic impacts that are immediately lethal to a small group (such as pedestrians or a single vehicle's occupants), and broader, multi-vehicle or mass-transit collisions that cause widespread but ultimately survivable injuries.")
-
+        render_image_with_insight(
+        "plots/Correlated_Facet_Grid.png", 
+        "Daily crash volume vs. Injury correlation", 
+        """By aggregating collision data daily, a clear positive correlation emerges between crash volume and total injuries across all NYC boroughs. Notably, Manhattan exhibits a "gridlock effect"—a high frequency of crashes but a noticeably flatter injury trendline, likely due to lower average vehicle speeds. In contrast, Brooklyn and Queens experience both the highest incident volumes and steeper injury rates, marking them as high-risk corridors for severe outcomes. Additionally, distinct data clusters in boroughs like Queens and Manhattan point to underlying cyclical trends, highlighting significantly different crash profiles between weekday commuting and weekend traffic."""
+        )    
+        
 def create_predictions_tab():
     t1, t2, t3 = st.tabs(["LOGISTIC COEFFICIENTS", "PREDICTED PROBABILITY", "DECISION TREE"])
     
