@@ -18,16 +18,16 @@ if menu == "DASHBOARD":
 
 elif menu == "KPI":
     st.subheader("📈 KEY PERFORMANCE INDICATORS")
-    # Add KPI function here
-
+    create_kpi_tab(df)
+    
 elif menu == "TIME":
     st.subheader("🕒 TIME ANALYSIS")
-    # Add Time function here
-
+    create_time_tab(df)
+    
 elif menu == "LOCATION":
     st.subheader("📍 LOCATION ANALYSIS")
-    # Add Location function here
-
+    create_location_tab(df)
+    
 elif menu == "CONTRIBUTING FACTORS":
     st.subheader("🚗 CONTRIBUTING FACTORS")
     create_contributing_factors_tab(df)
